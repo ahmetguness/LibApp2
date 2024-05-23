@@ -6,7 +6,7 @@ export const UserSlice = createSlice({
     userInfo: {
       userType: "member",
       userId: "",
-      userName: "Gunes",
+      userName: "",
       userPassword: "",
     },
   },

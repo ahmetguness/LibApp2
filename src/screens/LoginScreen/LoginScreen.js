@@ -1,19 +1,32 @@
-import React from "react";
-import { ImageBackground, View, Text } from "react-native";
+import React, { useState } from "react";
+import { ImageBackground, View, Text, Alert } from "react-native";
 import { styles } from "./styles";
 import { HStack, Switch } from "native-base";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUserType } from "../../redux/UserSlice";
 import FormControlArea from "../../components/formControl/FormControlArea";
 import PrimaryButton from "../../components/buttons/PrimaryButton";
+import { loginControl } from "../../services/service";
 
 export default function LoginScreen({ navigation }) {
   const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.user.userInfo);
+  const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleSwitchChange = () => {
     const newUserType = userInfo.userType === "member" ? "admin" : "member";
     dispatch(updateUserType(newUserType));
+  };
+
+  const handleLogin = async () => {
+    isValid = true;
+    // const isValid = await loginControl(userInfo.userType, userName, password);
+    if (isValid) {
+      navigation.navigate("HomeScreen");
+    } else {
+      Alert.alert("Login Failed", "Invalid username or password");
+    }
   };
 
   const backgroundImg =
@@ -39,13 +52,23 @@ export default function LoginScreen({ navigation }) {
       </View>
       <View>
         <View style={styles.loginFormContainer}>
-          <FormControlArea formName={"UserName"} formType={"text"} />
-          <FormControlArea formName={"Password"} formType={"password"} />
+          <FormControlArea
+            formName={"UserName"}
+            formType={"text"}
+            value={userName}
+            onChange={setUserName}
+          />
+          <FormControlArea
+            formName={"Password"}
+            formType={"password"}
+            value={password}
+            onChange={setPassword}
+          />
         </View>
         <PrimaryButton
           btnName={"Log In"}
           style={styles.primaryButton}
-          onPress={() => navigation.navigate("HomeScreen")}
+          onPress={handleLogin}
         />
       </View>
     </ImageBackground>
