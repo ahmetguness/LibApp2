@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { ImageBackground, View, Text } from "react-native";
 import { styles } from "./styles";
 import { HStack, Switch } from "native-base";
@@ -11,13 +11,13 @@ export default function LoginScreen({ navigation }) {
   const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.user.userInfo);
 
-  const handleSwitchChange = (value) => {
-    const newUserType = value ? "admin" : "member";
+  const handleSwitchChange = () => {
+    const newUserType = userInfo.userType === "member" ? "admin" : "member";
     dispatch(updateUserType(newUserType));
   };
 
   const backgroundImg =
-    userInfo.userType == "member"
+    userInfo.userType === "member"
       ? require("../../assets/background/member.png")
       : require("../../assets/background/admin.png");
 
@@ -31,8 +31,8 @@ export default function LoginScreen({ navigation }) {
           <Text style={styles.switchText}>Member</Text>
           <Switch
             size="lg"
-            onValueChange={handleSwitchChange}
-            value={userInfo.userType === "admin"}
+            isChecked={userInfo.userType === "admin"}
+            onToggle={handleSwitchChange}
           />
           <Text style={styles.switchText}>Admin</Text>
         </HStack>
