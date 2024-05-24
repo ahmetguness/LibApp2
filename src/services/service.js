@@ -22,3 +22,37 @@ export async function loginControl(userType, userName, password) {
     return false;
   }
 }
+
+export async function listCategories() {
+  try {
+    const categoriesRef = collection(db, "categories");
+    const querySnapshot = await getDocs(categoriesRef);
+
+    const categories = [];
+    querySnapshot.forEach((doc) => {
+      categories.push({ id: doc.id, ...doc.data() });
+    });
+
+    return categories;
+  } catch (error) {
+    console.error("ERROR: ", error);
+    return [];
+  }
+}
+
+export async function listBooksByCategory(categoryId) {
+  try {
+    const booksRef = collection(db, `categories/${categoryId}/books`);
+    const querySnapshot = await getDocs(booksRef);
+
+    const books = [];
+    querySnapshot.forEach((doc) => {
+      books.push({ id: doc.id, ...doc.data() });
+    });
+
+    return books;
+  } catch (error) {
+    console.error("ERROR: ", error);
+    return [];
+  }
+}

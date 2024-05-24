@@ -1,8 +1,8 @@
 import { Box, Divider, Heading, Icon, Input, VStack } from "native-base";
-import { Ionicons, MaterialIcons } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
 import { View } from "react-native";
 
-export default function SearchBar({ searchBarTitle, searchBarPlaceHolder }) {
+export default function SearchBar({ searchBarTitle, searchBarPlaceHolder, search, setSearch }) {
   return (
     <View style={{ alignItems: "center" }}>
       <VStack
@@ -29,6 +29,8 @@ export default function SearchBar({ searchBarTitle, searchBarPlaceHolder }) {
             px="1"
             fontSize="16"
             borderWidth="2.5"
+            value={search}
+            onChangeText={setSearch}
             InputLeftElement={
               <Icon
                 m="2"

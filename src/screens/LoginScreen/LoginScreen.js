@@ -3,7 +3,7 @@ import { ImageBackground, View, Text, Alert } from "react-native";
 import { styles } from "./styles";
 import { HStack, Switch } from "native-base";
 import { useDispatch, useSelector } from "react-redux";
-import { updateUserType } from "../../redux/UserSlice";
+import { updateUserInformation, updateUserType } from "../../redux/UserSlice";
 import FormControlArea from "../../components/formControl/FormControlArea";
 import PrimaryButton from "../../components/buttons/PrimaryButton";
 import { loginControl } from "../../services/service";
@@ -16,6 +16,8 @@ export default function LoginScreen({ navigation }) {
 
   const handleSwitchChange = () => {
     const newUserType = userInfo.userType === "member" ? "admin" : "member";
+    setUserName("");
+    setPassword("");
     dispatch(updateUserType(newUserType));
   };
 
@@ -23,6 +25,9 @@ export default function LoginScreen({ navigation }) {
     isValid = true;
     // const isValid = await loginControl(userInfo.userType, userName, password);
     if (isValid) {
+      dispatch(
+        updateUserInformation({ userName: userName, userPassword: password })
+      );
       navigation.navigate("HomeScreen");
     } else {
       Alert.alert("Login Failed", "Invalid username or password");
