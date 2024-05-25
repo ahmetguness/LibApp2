@@ -1,5 +1,14 @@
 import db from "./config.js";
-import { collection, query, where, getDocs } from "firebase/firestore";
+import {
+  collection,
+  query,
+  where,
+  getDocs,
+  getDoc,
+  arrayUnion,
+  doc,
+  updateDoc,
+} from "firebase/firestore";
 
 export async function loginControl(userType, userName, password) {
   try {
@@ -54,5 +63,43 @@ export async function listBooksByCategory(categoryId) {
   } catch (error) {
     console.error("ERROR: ", error);
     return [];
+  }
+}
+
+export async function fetchUsers(userType) {
+  try {
+    const userRef = collection(db, userType);
+    const querySnapshot = await getDocs(userRef);
+
+    const users = [];
+    querySnapshot.forEach((doc) => {
+      users.push({ id: doc.id, ...doc.data() });
+    });
+    return users;
+  } catch (error) {
+    console.log("ERROR: ", error);
+    return [];
+  }
+}
+
+export async function addMemberFavorites(memberId, userFavs) {
+  try {
+    const memberRef = doc(db, "member", memberId);
+
+    const favoritesArray = [];
+    for (const categoryId in userFavs) {
+      if (userFavs.hasOwnProperty(categoryId)) {
+        const bookId = userFavs[categoryId];
+        favoritesArray.push(`${categoryId}:${bookId}`);
+      }
+    }
+
+    await updateDoc(memberRef, {
+      memberFavorites: arrayUnion(...favoritesArray),
+    });
+
+    console.log("Favorites updated successfully");
+  } catch (error) {
+    console.error("ERROR: ", error);
   }
 }

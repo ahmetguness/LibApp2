@@ -32,4 +32,20 @@ export const styles = StyleSheet.create({
   scView: {
     flex: 1,
   },
+  authorContainer: {
+    width: "80%",
+    height: 30,
+    backgroundColor: "white",
+    borderRadius: 10,
+    marginHorizontal: "10%",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: "5%",
+  },
+  btnContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginHorizontal: "10%",
+    marginBottom: "5%",
+  },
 });

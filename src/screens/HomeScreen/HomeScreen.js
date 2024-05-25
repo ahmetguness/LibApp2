@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import { styles } from "./styles";
 import AdminHomeScreen from "./AdminHomeScreen";
 import MemberHomeScreen from "./MemberHomeScreen";
-import { Heading } from "native-base";
 
 export default function HomeScreen({ navigation }) {
   const userInfo = useSelector((state) => state.user.userInfo);

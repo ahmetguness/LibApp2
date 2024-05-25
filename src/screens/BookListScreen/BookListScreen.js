@@ -7,7 +7,6 @@ import CategoryCard from "../../components/cards/CategoryCard";
 import { updateBookId, updateBookInfo } from "../../redux/BookSlice";
 import { styles } from "./styles";
 
-
 export default function BookListScreen({ navigation }) {
   const [books, setBooks] = useState([]);
   const [search, setSearch] = useState("");
@@ -53,6 +52,8 @@ export default function BookListScreen({ navigation }) {
                 updateBookInfo({
                   bookName: item.bookName,
                   bookImg: item.bookImg,
+                  bookAuthor: item.bookAuthor,
+                  bookSum: item.bookSum,
                 })
               );
               navigation.navigate("BookDetailsScreen");

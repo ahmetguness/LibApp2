@@ -8,6 +8,8 @@ export const BookSlice = createSlice({
     bookInfo: {
       bookName: "",
       bookImg: "",
+      bookSum: "",
+      bookAuthor: "",
     },
   },
   reducers: {
@@ -18,9 +20,11 @@ export const BookSlice = createSlice({
       state.categoryId = action.payload;
     },
     updateBookInfo(state, action) {
-      const { bookName, bookImg } = action.payload;
+      const { bookName, bookImg, bookSum, bookAuthor } = action.payload;
       state.bookInfo.bookName = bookName;
       state.bookInfo.bookImg = bookImg;
+      state.bookInfo.bookSum = bookSum;
+      state.bookInfo.bookAuthor = bookAuthor;
     },
   },
 });
