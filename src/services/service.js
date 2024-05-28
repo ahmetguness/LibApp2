@@ -81,25 +81,3 @@ export async function fetchUsers(userType) {
     return [];
   }
 }
-
-export async function addMemberFavorites(memberId, userFavs) {
-  try {
-    const memberRef = doc(db, "member", memberId);
-
-    const favoritesArray = [];
-    for (const categoryId in userFavs) {
-      if (userFavs.hasOwnProperty(categoryId)) {
-        const bookId = userFavs[categoryId];
-        favoritesArray.push(`${categoryId}:${bookId}`);
-      }
-    }
-
-    await updateDoc(memberRef, {
-      memberFavorites: arrayUnion(...favoritesArray),
-    });
-
-    console.log("Favorites updated successfully");
-  } catch (error) {
-    console.error("ERROR: ", error);
-  }
-}

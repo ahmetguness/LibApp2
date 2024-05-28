@@ -11,13 +11,32 @@ export default function BookDetailsScreen() {
   const categoryId = useSelector((state) => state.book.categoryId);
   const bookId = useSelector((state) => state.book.bookId);
   const userFavs = useSelector((state) => state.user.userFavorites);
+  const userType = useSelector((state) => state.user.userInfo.userType);
+
+  const dispatch = useDispatch();
 
   const reserveBtnName =
     userFavs[categoryId] && userFavs[categoryId].includes(bookId)
       ? "unReserve"
       : "Reserve";
 
-  const dispatch = useDispatch();
+  const btns =
+    userType === "member" ? (
+      <View style={styles.btnContainer}>
+        <SecondaryButton
+          btnName={reserveBtnName}
+          onPress={() => {
+            dispatch(
+              updateUserFavorites({
+                favKey: categoryId,
+                favValue: bookId,
+              })
+            );
+          }}
+        />
+        <SecondaryButton btnName={"asd"} onPress={() => null} />
+      </View>
+    ) : null;
 
   return (
     <ImageBackground
@@ -45,20 +64,7 @@ export default function BookDetailsScreen() {
             onPress={null}
           />
         </View>
-        <View style={styles.btnContainer}>
-          <SecondaryButton
-            btnName={reserveBtnName}
-            onPress={() => {
-              dispatch(
-                updateUserFavorites({
-                  favKey: categoryId,
-                  favValue: bookId,
-                })
-              );
-            }}
-          />
-          <SecondaryButton btnName={"asd"} onPress={() => null} />
-        </View>
+        {btns}
       </ScrollView>
     </ImageBackground>
   );
