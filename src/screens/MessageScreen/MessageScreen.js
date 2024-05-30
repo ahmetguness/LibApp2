@@ -20,7 +20,12 @@ export default function MessageScreen() {
       </View>
       <ScrollView>
         <MessageCard />
-        <MessageCard messageOwner={"sender"} />
+        <MessageCard
+          messageOwner={"sender"}
+          messageContext={"context"}
+          date={"date"}
+          name={"name"+":"}
+        />
       </ScrollView>
     </ImageBackground>
   );
