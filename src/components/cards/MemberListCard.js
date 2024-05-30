@@ -1,16 +1,22 @@
-import { DeleteIcon } from "native-base";
+import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Icon } from "native-base";
+import { MaterialIcons } from "@expo/vector-icons";
 
-export default function MemberListCard({ memberName }) {
+export default function MemberListCard({
+  memberName,
+  onPressMessage,
+  onPressDel,
+}) {
   return (
     <View style={styles.root}>
       <Text style={styles.text}>{memberName}</Text>
       <View style={styles.iconContainer}>
-        <TouchableOpacity>
-          <DeleteIcon size="xl" />
+        <TouchableOpacity onPress={onPressMessage}>
+          <Icon as={MaterialIcons} name="message" size="xl" color="blue" />
         </TouchableOpacity>
-        <TouchableOpacity>
-          <DeleteIcon size="xl" />
+        <TouchableOpacity onPress={onPressDel}>
+          <Icon as={MaterialIcons} name="delete" size="xl" color="red" />
         </TouchableOpacity>
       </View>
     </View>
@@ -27,6 +33,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     flexDirection: "row",
+    marginBottom: "4%",
   },
   text: {
     marginLeft: "6%",

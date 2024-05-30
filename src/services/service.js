@@ -4,10 +4,6 @@ import {
   query,
   where,
   getDocs,
-  getDoc,
-  arrayUnion,
-  doc,
-  updateDoc,
 } from "firebase/firestore";
 
 export async function loginControl(userType, userName, password) {

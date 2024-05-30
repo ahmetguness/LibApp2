@@ -8,6 +8,7 @@ import AdminHomeScreen from "../screens/HomeScreen/AdminHomeScreen";
 import BookListScreen from "../screens/BookListScreen/BookListScreen";
 import BookDetailsScreen from "../screens/BookDetailsScreen/BookDetailsScreen";
 import MemberListScreen from "../screens/MemberListScreen/MemberListScreen";
+import MessageScreen from "../screens/MessageScreen/MessageScreen";
 
 export default function StackNav() {
   const Stack = createStackNavigator();
@@ -25,6 +26,7 @@ export default function StackNav() {
       <Stack.Screen name="BookListScreen" component={BookListScreen} />
       <Stack.Screen name="BookDetailsScreen" component={BookDetailsScreen} />
       <Stack.Screen name="MemberListScreen" component={MemberListScreen} />
+      <Stack.Screen name="MessageScreen" component={MessageScreen} />
     </Stack.Navigator>
   );
 }
