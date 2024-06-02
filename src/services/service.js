@@ -1,10 +1,5 @@
 import db from "./config.js";
-import {
-  collection,
-  query,
-  where,
-  getDocs,
-} from "firebase/firestore";
+import { collection, query, where, getDocs, addDoc } from "firebase/firestore";
 
 export async function loginControl(userType, userName, password) {
   try {
@@ -75,5 +70,42 @@ export async function fetchUsers(userType) {
   } catch (error) {
     console.log("ERROR: ", error);
     return [];
+  }
+}
+
+export async function sendMessage(senderId, receiverId, messageContext) {
+  try {
+    const messagesRef = collection(db, "messages");
+    const message = {
+      senderId,
+      receiverId,
+      messageContext,
+      date: new Date(),
+    };
+    await addDoc(messagesRef, message);
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function getMessages(senderId, receiverId) {
+  try {
+    const messagesRef = collection(db, "messages");
+    const q = query(
+      messagesRef,
+      where("senderId", "==", senderId),
+      where("receiverId", "==", receiverId)
+    );
+
+    const querySnapshot = await getDocs(q);
+
+    const messages = [];
+    querySnapshot.forEach((doc) => {
+      messages.push({ id: doc.id, ...doc.data() });
+    });
+
+    return messages;
+  } catch (error) {
+    throw error;
   }
 }

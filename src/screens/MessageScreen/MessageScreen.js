@@ -2,6 +2,8 @@ import { ImageBackground, ScrollView, Text, View } from "react-native";
 import { useSelector } from "react-redux";
 import { styles } from "./styles";
 import MessageCard from "../../components/cards/MessageCard";
+import { useEffect } from "react";
+import { getMessages, sendMessage } from "../../services/service";
 
 export default function MessageScreen() {
   const senderId = useSelector((state) => state.message.messageSenderId);
@@ -9,6 +11,22 @@ export default function MessageScreen() {
   const receiverUserName = useSelector(
     (state) => state.message.messageReceiverUserName
   );
+
+  useEffect(() => {
+    try {
+      async function sendMes() {
+        await sendMessage("1", "2", "3");
+      }
+      async function getMes() {
+        const mess = await getMessages("1", "2");
+        console.log(mess);
+      }
+    } catch (error) {
+      throw error;
+    }
+    // sendMes();
+    getMes();
+  }, []);
 
   return (
     <ImageBackground
@@ -24,7 +42,7 @@ export default function MessageScreen() {
           messageOwner={"sender"}
           messageContext={"context"}
           date={"date"}
-          name={"name"+":"}
+          name={"name" + ":"}
         />
       </ScrollView>
     </ImageBackground>
