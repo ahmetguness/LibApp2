@@ -6,7 +6,6 @@ import MemberListCard from "../../components/cards/MemberListCard";
 import { Heading } from "native-base";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  
   updateMessageReceiverInfo,
   updateMessageReceiverUserName,
   updateReceiverId,
@@ -17,11 +16,14 @@ export default function MemberListScreen({ navigation }) {
   const [members, setMembers] = useState([]);
   const dispatcher = useDispatch();
   const userId = useSelector((state) => state.user.userInfo.userId);
+  const userType = useSelector((state) => state.user.userInfo.userType);
+
+  const listType = userType === "member" ? "admin" : "member";
 
   useEffect(() => {
     async function getMembers() {
       try {
-        const memberList = await fetchUsers("member");
+        const memberList = await fetchUsers(listType);
         setMembers(memberList);
       } catch (error) {
         console.error(error);
@@ -29,17 +31,23 @@ export default function MemberListScreen({ navigation }) {
     }
 
     getMembers();
-  }, []);
+  }, [listType]);
 
   const renderMember = ({ item }) => (
     <MemberListCard
-      memberName={item.memberUserName.toUpperCase()}
+      memberName={
+        listType === "admin" ? item.adminUserName : item.memberUserName
+      }
       onPressDel={() => console.log("del")}
       onPressMessage={() => {
         navigation.navigate("MessageScreen");
         dispatcher(updateSenderId(userId));
         dispatcher(updateReceiverId(item.id));
-        dispatcher(updateMessageReceiverUserName(item.memberUserName));
+        dispatcher(
+          updateMessageReceiverUserName(
+            listType === "admin" ? item.adminUserName : item.memberUserName
+          )
+        );
       }}
     />
   );

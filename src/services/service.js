@@ -80,7 +80,7 @@ export async function sendMessage(senderId, receiverId, messageContext) {
       senderId,
       receiverId,
       messageContext,
-      date: new Date(),
+      date: new Date().toISOString(),
     };
     await addDoc(messagesRef, message);
   } catch (error) {
@@ -101,7 +101,12 @@ export async function getMessages(senderId, receiverId) {
 
     const messages = [];
     querySnapshot.forEach((doc) => {
-      messages.push({ id: doc.id, ...doc.data() });
+      const data = doc.data();
+      messages.push({
+        id: doc.id,
+        ...data,
+        date: data.date ? data.date.toDate().toISOString() : null,
+      });
     });
 
     return messages;

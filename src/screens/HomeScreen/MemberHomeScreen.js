@@ -17,11 +17,13 @@ export default function MemberHomeScreen({ navigation }) {
           cardName={"Categories"}
           onPress={() => navigation.navigate("CategoriesScreen")}
         />
-        <MenuCard cardName={"Messages"} />
+        <MenuCard
+          cardName={"Messages"}
+          onPress={() => navigation.navigate("MemberListScreen")}
+        />
       </View>
       <View style={styles.rowCardContainer}>
-        <MenuCard cardName={"Messa"} />
-        <MenuCard cardName={"Messages"} />
+        <MenuCard cardName={"Reserved"} onPress={()=> navigation.navigate("ReservedBookListScreen")} />
       </View>
     </View>
   );

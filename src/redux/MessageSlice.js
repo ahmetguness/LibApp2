@@ -6,6 +6,7 @@ export const MessageSlice = createSlice({
     messageSenderId: "",
     messageReceiverId: "",
     messageReceiverUserName: "",
+    messages: [],
   },
   reducers: {
     updateSenderId(state, action) {
@@ -17,9 +18,20 @@ export const MessageSlice = createSlice({
     updateMessageReceiverUserName(state, action) {
       state.messageReceiverUserName = action.payload;
     },
+    setMessages(state, action) {
+      state.messages = action.payload;
+    },
+    addMessage(state, action) {
+      state.messages.push(action.payload);
+    },
   },
 });
 
 export default MessageSlice;
-export const { updateReceiverId, updateSenderId, updateMessageReceiverUserName } =
-  MessageSlice.actions;
+export const {
+  updateReceiverId,
+  updateSenderId,
+  updateMessageReceiverUserName,
+  setMessages,
+  addMessage,
+} = MessageSlice.actions;

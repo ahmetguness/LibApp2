@@ -3,12 +3,11 @@ import HomeScreen from "../screens/HomeScreen/HomeScreen";
 import IntroScreen from "../screens/IntroScreen/IntroScreen";
 import LoginScreen from "../screens/LoginScreen/LoginScreen";
 import CategoriesScreen from "../screens/CategoriesScreen/CategoriesScreen";
-import MemberHomeScreen from "../screens/HomeScreen/MemberHomeScreen";
-import AdminHomeScreen from "../screens/HomeScreen/AdminHomeScreen";
 import BookListScreen from "../screens/BookListScreen/BookListScreen";
 import BookDetailsScreen from "../screens/BookDetailsScreen/BookDetailsScreen";
 import MemberListScreen from "../screens/MemberListScreen/MemberListScreen";
 import MessageScreen from "../screens/MessageScreen/MessageScreen";
+import ReservedBookListScreen from "../screens/ReservedBookListScreen/ReservedBookListScreen";
 
 export default function StackNav() {
   const Stack = createStackNavigator();
@@ -27,6 +26,10 @@ export default function StackNav() {
       <Stack.Screen name="BookDetailsScreen" component={BookDetailsScreen} />
       <Stack.Screen name="MemberListScreen" component={MemberListScreen} />
       <Stack.Screen name="MessageScreen" component={MessageScreen} />
+      <Stack.Screen
+        name="ReservedBookListScreen"
+        component={ReservedBookListScreen}
+      />
     </Stack.Navigator>
   );
 }
