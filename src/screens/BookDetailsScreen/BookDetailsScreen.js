@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from "react";
 import { Heading } from "native-base";
 import { Image, ImageBackground, ScrollView, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
@@ -5,6 +6,7 @@ import { styles } from "./styles";
 import SummaryCard from "../../components/cards/SummaryCard";
 import SecondaryButton from "../../components/buttons/SecondaryButton";
 import { updateUserFavorites } from "../../redux/UserSlice";
+import { reserveBook } from "../../services/service";
 
 export default function BookDetailsScreen() {
   const bookInfo = useSelector((state) => state.book.bookInfo);
@@ -12,28 +14,45 @@ export default function BookDetailsScreen() {
   const bookId = useSelector((state) => state.book.bookId);
   const userFavs = useSelector((state) => state.user.userFavorites);
   const userType = useSelector((state) => state.user.userInfo.userType);
-
+  const userId = useSelector((state) => state.user.userInfo.userId);
   const dispatch = useDispatch();
+
+  const [shouldReserve, setShouldReserve] = useState(false);
+
+  useEffect(() => {
+    if (shouldReserve) {
+      reserveBook(userId, userFavs)
+        .then(() => setShouldReserve(false))
+        .catch((error) => {
+          console.error("Error handling reserve:", error);
+          setShouldReserve(false);
+        });
+    }
+  }, [userFavs, shouldReserve, userId]);
 
   const reserveBtnName =
     userFavs[categoryId] && userFavs[categoryId].includes(bookId)
       ? "unReserve"
       : "Reserve";
 
+  const handleReserve = async () => {
+    try {
+      dispatch(
+        updateUserFavorites({
+          favKey: categoryId,
+          favValue: bookId,
+        })
+      );
+      setShouldReserve(true);
+    } catch (error) {
+      console.error("Error handling reserve:", error);
+    }
+  };
+
   const btns =
     userType === "member" ? (
       <View style={styles.btnContainer}>
-        <SecondaryButton
-          btnName={reserveBtnName}
-          onPress={() => {
-            dispatch(
-              updateUserFavorites({
-                favKey: categoryId,
-                favValue: bookId,
-              })
-            );
-          }}
-        />
+        <SecondaryButton btnName={reserveBtnName} onPress={handleReserve} />
         <SecondaryButton btnName={"asd"} onPress={() => null} />
       </View>
     ) : null;

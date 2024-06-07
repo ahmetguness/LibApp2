@@ -1,22 +1,14 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
-export default function ReservedBookCard({ bookName, onPress }) {
+export default function ReservedBookCard({ bookName, onPress, imgPath }) {
   return (
     <View style={styles.root}>
       <View style={styles.imgContainer}>
-        <Image
-          style={{
-            height: 50,
-            width: 50,
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-          source={require("../../assets/background/books.png")}
-        />
+        <Image style={styles.img} source={imgPath} />
       </View>
       <View style={styles.bookNameContainer}>
-        <Text>{bookName}</Text>
+        <Text style={styles.bookNameText}>{bookName}</Text>
       </View>
       <TouchableOpacity style={styles.iconContainer} onPress={onPress}>
         <Ionicons name="return-up-back-outline" size={35} color="black" />
@@ -49,5 +41,16 @@ const styles = StyleSheet.create({
     width: 10,
     justifyContent: "center",
     alignItems: "center",
+    marginLeft: 35,
+    marginTop: "12%",
+  },
+  img: {
+    height: 50,
+    width: 50,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  bookNameText: {
+    fontSize: 16,
   },
 });

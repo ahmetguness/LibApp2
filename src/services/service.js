@@ -1,5 +1,15 @@
 import db from "./config.js";
-import { collection, query, where, getDocs, addDoc } from "firebase/firestore";
+import {
+  collection,
+  query,
+  where,
+  getDocs,
+  addDoc,
+  doc,
+  updateDoc,
+  arrayUnion,
+  getDoc,
+} from "firebase/firestore";
 
 export async function loginControl(userType, userName, password) {
   try {
@@ -112,5 +122,38 @@ export async function getMessages(senderId, receiverId) {
     return messages;
   } catch (error) {
     throw error;
+  }
+}
+
+export async function reserveBook(memberId, reservedBooks) {
+  try {
+    const memberDocRef = doc(db, "member", memberId);
+
+    await updateDoc(memberDocRef, {
+      reservedBooks: reservedBooks,
+    });
+
+    return true;
+  } catch (error) {
+    console.error("ERROR: ", error);
+    return false;
+  }
+}
+
+export async function fetchReservedBooks(memberId) {
+  try {
+    const memberDocRef = doc(db, "member", memberId);
+    const memberDoc = await getDoc(memberDocRef);
+
+    if (memberDoc.exists()) {
+      const data = memberDoc.data();
+      return data.reservedBooks || {};
+    } else {
+      console.error("No such document!");
+      return {};
+    }
+  } catch (error) {
+    console.error("ERROR: ", error);
+    return {};
   }
 }

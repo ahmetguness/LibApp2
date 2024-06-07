@@ -9,7 +9,7 @@ export const UserSlice = createSlice({
       userName: "",
       userPassword: "",
     },
-    userFavorites: {},
+    userFavorites: null,
   },
   reducers: {
     updateUserType(state, action) {
@@ -50,6 +50,14 @@ export const UserSlice = createSlice({
       } else {
         state.userFavorites[favKey] = [favValue];
       }
+      for (const key in state.userFavorites) {
+        if (state.userFavorites[key].length === 0) {
+          delete state.userFavorites[key];
+        }
+      }
+    },
+    updateReservedBooks(state, action) {
+      state.userFavorites = action.payload;
     },
   },
 });
@@ -61,4 +69,5 @@ export const {
   updateUserPassword,
   updateUserInformation,
   updateUserFavorites,
+  updateReservedBooks,
 } = UserSlice.actions;

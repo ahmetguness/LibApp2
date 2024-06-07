@@ -8,7 +8,8 @@ export const styles = StyleSheet.create({
   emptyText: {
     textAlign: "center",
     marginTop: 20,
-    fontSize: 18,
-    color: "gray",
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "white",
   },
 });

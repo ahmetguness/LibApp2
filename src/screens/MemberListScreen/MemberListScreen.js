@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { ImageBackground, View, FlatList } from "react-native";
 import { styles } from "./styles";
-import { fetchUsers } from "../../services/service";
+import { fetchUsers, fetchReservedBooks } from "../../services/service";
 import MemberListCard from "../../components/cards/MemberListCard";
 import { Heading } from "native-base";
 import { useDispatch, useSelector } from "react-redux";
@@ -32,6 +32,8 @@ export default function MemberListScreen({ navigation }) {
 
     getMembers();
   }, [listType]);
+
+  
 
   const renderMember = ({ item }) => (
     <MemberListCard
