@@ -8,6 +8,8 @@ import BookDetailsScreen from "../screens/BookDetailsScreen/BookDetailsScreen";
 import MemberListScreen from "../screens/MemberListScreen/MemberListScreen";
 import MessageScreen from "../screens/MessageScreen/MessageScreen";
 import ReservedBookListScreen from "../screens/ReservedBookListScreen/ReservedBookListScreen";
+import AddBookScreen from "../screens/AddBookScreen/AddBookScreen";
+import AddCategoryScreen from "../screens/AddBookScreen/AddCategoryScreen";
 
 export default function StackNav() {
   const Stack = createStackNavigator();
@@ -30,6 +32,8 @@ export default function StackNav() {
         name="ReservedBookListScreen"
         component={ReservedBookListScreen}
       />
+      <Stack.Screen name="AddBookScreen" component={AddBookScreen} />
+      <Stack.Screen name="AddCategoryScreen" component={AddCategoryScreen} />
     </Stack.Navigator>
   );
 }

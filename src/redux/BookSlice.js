@@ -11,6 +11,7 @@ export const BookSlice = createSlice({
       bookSum: "",
       bookAuthor: "",
     },
+    categoryIdDict: null,
   },
   reducers: {
     updateBookId(state, action) {
@@ -26,9 +27,16 @@ export const BookSlice = createSlice({
       state.bookInfo.bookSum = bookSum;
       state.bookInfo.bookAuthor = bookAuthor;
     },
+    updateCategoryIdDict(state, action) {
+      state.categoryIdDict = action.payload;
+    },
   },
 });
 
 export default BookSlice;
-export const { updateBookId, updateCategoryId, updateBookInfo } =
-  BookSlice.actions;
+export const {
+  updateBookId,
+  updateCategoryId,
+  updateBookInfo,
+  updateCategoryIdDict,
+} = BookSlice.actions;

@@ -7,7 +7,6 @@ import {
   addDoc,
   doc,
   updateDoc,
-  arrayUnion,
   getDoc,
 } from "firebase/firestore";
 
@@ -155,5 +154,65 @@ export async function fetchReservedBooks(memberId) {
   } catch (error) {
     console.error("ERROR: ", error);
     return {};
+  }
+}
+
+export async function getReservedBooksInfo(reservedBooksObj) {
+  try {
+    const reservedBooksInfo = {};
+
+    for (const [categoryId, bookIds] of Object.entries(reservedBooksObj)) {
+      reservedBooksInfo[categoryId] = [];
+
+      for (const bookId of bookIds) {
+        const bookDocRef = doc(db, `categories/${categoryId}/books`, bookId);
+        const bookDoc = await getDoc(bookDocRef);
+
+        if (bookDoc.exists()) {
+          reservedBooksInfo[categoryId].push({ id: bookId, ...bookDoc.data() });
+        } else {
+          console.error(`No such document for bookId: ${bookId}`);
+        }
+      }
+    }
+
+    return reservedBooksInfo;
+  } catch (error) {
+    console.error("ERROR: ", error);
+    throw error;
+  }
+}
+
+export async function fetchCategories() {
+  try {
+    const categoriesRef = collection(db, "categories");
+    const querySnapshot = await getDocs(categoriesRef);
+
+    const categories = {};
+    querySnapshot.forEach((doc) => {
+      const data = doc.data();
+      categories[doc.id] = data.categoryName;
+    });
+
+    return categories;
+  } catch (error) {
+    console.error("ERROR: ", error);
+    throw error;
+  }
+}
+export async function addBook(categoryId, bookInfo) {
+  try {
+    const booksRef = collection(db, `categories/${categoryId}/books`);
+    await addDoc(booksRef, {
+      bookAuthor: bookInfo.bookAuthor,
+      bookImg: bookInfo.bookImg,
+      bookName: bookInfo.bookName,
+      bookSum: bookInfo.bookSum,
+    });
+
+    return true;
+  } catch (error) {
+    console.error("ERROR: ", error);
+    throw error;
   }
 }
