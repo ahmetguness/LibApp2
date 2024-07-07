@@ -28,12 +28,10 @@ export default function MessageScreen() {
     async function fetchMessages() {
       try {
         const fetchedMessages = await getMessages(senderId, receiverId);
-        console.log("Fetched messages:", fetchedMessages); // Log fetched messages for debugging
+        console.log("Fetched messages:", fetchedMessages);
 
-        // Ensure each message has a valid date
         const formattedMessages = fetchedMessages.map((msg) => ({
           ...msg,
-          date: msg.date ? new Date(msg.date).toISOString() : new Date().toISOString(), // Convert date to ISO string if necessary
         }));
         dispatch(setMessages(formattedMessages));
       } catch (error) {
@@ -44,17 +42,21 @@ export default function MessageScreen() {
     fetchMessages();
   }, [dispatch, senderId, receiverId]);
 
+  const [messId, setMessId] = useState(0);
+  function uniqueMessId() {
+    setMessId(messId + 1);
+    return messId;
+  }
+
   const handleSendMessage = async () => {
     try {
-      const messageDate = new Date().toISOString();
       await sendMessage(senderId, receiverId, newMessage);
       dispatch(
         addMessage({
-          id: new Date().getTime(), // Ensure unique id for new message
+          id: uniqueMessId(),
           senderId,
           receiverId,
           messageContext: newMessage,
-          date: messageDate,
         })
       );
       setNewMessage("");

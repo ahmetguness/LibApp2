@@ -5,7 +5,6 @@ export default function MessageCard({
   messageOwner,
   messageContext,
   name,
-  date,
 }) {
   const alignItems = messageOwner === "sender" ? "flex-end" : "flex-start";
 
@@ -14,7 +13,6 @@ export default function MessageCard({
       <View style={styles.innerContainer}>
         <Text style={styles.nameText}>{name}</Text>
         <Text style={styles.contextText}>{messageContext}</Text>
-        <Text style={styles.dateText}>{date}</Text>
       </View>
     </View>
   );

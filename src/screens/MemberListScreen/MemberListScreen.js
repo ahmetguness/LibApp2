@@ -33,8 +33,6 @@ export default function MemberListScreen({ navigation }) {
     getMembers();
   }, [listType]);
 
-  
-
   const renderMember = ({ item }) => (
     <MemberListCard
       memberName={

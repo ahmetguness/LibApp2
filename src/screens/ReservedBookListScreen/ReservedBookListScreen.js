@@ -25,7 +25,7 @@ export default function ReservedBookListScreen() {
     <ReservedBookCard
       bookName={item.bookName}
       imgPath={{ uri: item.bookImg }}
-      onPress={() => console.log(`Pressed on ${item.bookName}`)}
+      onPress={() => console.log(`Pressed on ${item.bookName} ${item.id}`)}
     />
   );
 

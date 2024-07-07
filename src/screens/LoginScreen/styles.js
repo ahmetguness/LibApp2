@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import COLORS from "../../theme/colors";
 
 export const styles = StyleSheet.create({
   root: {
@@ -12,11 +13,19 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginTop: "4%",
+    backgroundColor: COLORS.primaryBlue1,
+    marginHorizontal: "10%",
+    borderRadius: 10,
+    height: 70,
   },
   titleContainer: {
     justifyContent: "center",
     alignItems: "center",
     marginTop: "4%",
+    backgroundColor: COLORS.primaryBlue1,
+    borderRadius: 10,
+    marginHorizontal: "10%",
+    height: 70,
   },
   title: {
     fontSize: 40,
@@ -27,6 +36,6 @@ export const styles = StyleSheet.create({
     marginTop: "36%",
   },
   primaryButton: {
-    marginTop: "6%",
+    marginTop: "15%",
   },
 });

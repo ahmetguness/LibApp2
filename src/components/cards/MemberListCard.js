@@ -15,9 +15,6 @@ export default function MemberListCard({
         <TouchableOpacity onPress={onPressMessage}>
           <Icon as={MaterialIcons} name="message" size="xl" color="blue" />
         </TouchableOpacity>
-        <TouchableOpacity onPress={onPressDel}>
-          <Icon as={MaterialIcons} name="delete" size="xl" color="red" />
-        </TouchableOpacity>
       </View>
     </View>
   );
@@ -40,9 +37,8 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   iconContainer: {
-    marginRight: "6%",
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "space-evenly",
     width: "22%",
   },
 });

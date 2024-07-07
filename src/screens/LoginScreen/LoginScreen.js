@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { ImageBackground, View, Text, Alert, ScrollView } from "react-native";
+import { View, Text, Alert, ScrollView } from "react-native";
 import { styles } from "./styles";
 import { HStack, Switch } from "native-base";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,6 +7,7 @@ import { updateUserInformation, updateUserType } from "../../redux/UserSlice";
 import FormControlArea from "../../components/formControl/FormControlArea";
 import PrimaryButton from "../../components/buttons/PrimaryButton";
 import { fetchUsers, loginControl } from "../../services/service";
+import COLORS from "../../theme/colors";
 
 export default function LoginScreen({ navigation }) {
   const dispatch = useDispatch();
@@ -59,50 +60,51 @@ export default function LoginScreen({ navigation }) {
     }
   };
 
-  const backgroundImg =
-    userInfo.userType === "member"
-      ? require("../../assets/background/member.png")
-      : require("../../assets/background/admin.png");
-
   return (
-    <ImageBackground style={styles.root} source={backgroundImg}>
-      <ScrollView style={{ flex: 1 }}>
-        <View style={styles.titleContainer}>
-          <Text style={styles.title}>{userInfo.userType.toUpperCase()}</Text>
-        </View>
-        <View style={styles.switchContainer}>
-          <HStack alignItems="center" space={4}>
-            <Text style={styles.switchText}>Member</Text>
-            <Switch
-              size="lg"
-              isChecked={userInfo.userType === "admin"}
-              onToggle={handleSwitchChange}
-            />
-            <Text style={styles.switchText}>Admin</Text>
-          </HStack>
-        </View>
-        <View>
-          <View style={styles.loginFormContainer}>
-            <FormControlArea
-              formName={"UserName"}
-              formType={"text"}
-              value={userName}
-              onChange={setUserName}
-            />
-            <FormControlArea
-              formName={"Password"}
-              formType={"password"}
-              value={password}
-              onChange={setPassword}
-            />
-          </View>
-          <PrimaryButton
-            btnName={"Log In"}
-            style={styles.primaryButton}
-            onPress={handleLogin}
+    <ScrollView style={{ flex: 1, backgroundColor: COLORS.primaryBlue }}>
+      <View style={styles.titleContainer}>
+        <Text style={styles.title}>{userInfo.userType.toUpperCase()}</Text>
+      </View>
+      <View style={styles.switchContainer}>
+        <HStack alignItems="center" space={4}>
+          <Text style={styles.switchText}>Member</Text>
+          <Switch
+            size="lg"
+            isChecked={userInfo.userType === "admin"}
+            onToggle={handleSwitchChange}
+          />
+          <Text style={styles.switchText}>Admin</Text>
+        </HStack>
+      </View>
+      <View
+        style={{
+          backgroundColor: COLORS.primaryBlue1,
+          borderRadius: 10,
+          marginHorizontal: "10%",
+          paddingBottom: 60,
+          marginTop: "5%",
+        }}
+      >
+        <View style={styles.loginFormContainer}>
+          <FormControlArea
+            formName={"UserName"}
+            formType={"text"}
+            value={userName}
+            onChange={setUserName}
+          />
+          <FormControlArea
+            formName={"Password"}
+            formType={"password"}
+            value={password}
+            onChange={setPassword}
           />
         </View>
-      </ScrollView>
-    </ImageBackground>
+        <PrimaryButton
+          btnName={"Log In"}
+          style={styles.primaryButton}
+          onPress={handleLogin}
+        />
+      </View>
+    </ScrollView>
   );
 }

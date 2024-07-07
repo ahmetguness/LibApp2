@@ -6,14 +6,14 @@ export const styles = StyleSheet.create({
   },
   titleContainer: {
     marginTop: "10%",
-    height: 40,
+    height: 60,
     justifyContent: "center",
     alignItems: "center",
     marginBottom: "10%",
   },
   title: {
     fontWeight: "bold",
-    fontSize: 24,
+    fontSize: 40,
     color: "white",
   },
   screen: {

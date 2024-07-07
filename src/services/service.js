@@ -114,7 +114,6 @@ export async function getMessages(senderId, receiverId) {
       messages.push({
         id: doc.id,
         ...data,
-        date: data.date ? data.date.toDate().toISOString() : null,
       });
     });
 

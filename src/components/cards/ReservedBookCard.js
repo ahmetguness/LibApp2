@@ -7,8 +7,19 @@ export default function ReservedBookCard({ bookName, onPress, imgPath }) {
       <View style={styles.imgContainer}>
         <Image style={styles.img} source={imgPath} />
       </View>
-      <View style={styles.bookNameContainer}>
-        <Text style={styles.bookNameText}>{bookName}</Text>
+      <View
+        style={{
+          flexDirection: "coulmn",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <View style={styles.bookNameContainer}>
+          <Text style={styles.bookNameText}>{bookName}</Text>
+        </View>
+        <View>
+          <Text>-30 days left-</Text>
+        </View>
       </View>
       <TouchableOpacity style={styles.iconContainer} onPress={onPress}>
         <Ionicons name="return-up-back-outline" size={35} color="black" />
