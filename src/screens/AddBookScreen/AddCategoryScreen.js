@@ -4,6 +4,7 @@ import { styles } from "./styles";
 import { Input, Stack } from "native-base";
 import PrimaryButton from "../../components/buttons/PrimaryButton";
 import { addCategory } from "../../services/service";
+import COLORS from "../../theme/colors";
 
 export default function AddCategoryScreen() {
   const [categoryName, setCategoryName] = useState("");
@@ -36,31 +37,42 @@ export default function AddCategoryScreen() {
           <Text style={styles.title}>Add Category</Text>
         </View>
 
-        <View style={styles.categoryContainer}>
-          <View style={styles.categoryTitleContainer}>
-            <Text style={styles.categoryTitle}>Category Name:</Text>
+        <View
+          style={{
+            backgroundColor: COLORS.primaryBlue,
+            marginHorizontal: "5%",
+            borderRadius: 10,
+            marginTop: "15%",
+            height: 350,
+            justifyContent: "center",
+          }}
+        >
+          <View style={styles.categoryContainer}>
+            <View style={styles.categoryTitleContainer}>
+              <Text style={styles.categoryTitle}>Category Name:</Text>
+            </View>
+            <Input
+              size="xl"
+              placeholder="Category Name"
+              value={categoryName}
+              onChangeText={setCategoryName}
+            />
+            <View style={styles.categoryTitleContainer}>
+              <Text style={styles.categoryTitle}>Photo URL:</Text>
+            </View>
+            <Input
+              size="xl"
+              placeholder="Photo Url"
+              value={categoryImg}
+              onChangeText={setCategoryImg}
+            />
           </View>
-          <Input
-            size="xl"
-            placeholder="Category Name"
-            value={categoryName}
-            onChangeText={setCategoryName}
-          />
-          <View style={styles.categoryTitleContainer}>
-            <Text style={styles.categoryTitle}>Photo URL:</Text>
-          </View>
-          <Input
-            size="xl"
-            placeholder="Photo Url"
-            value={categoryImg}
-            onChangeText={setCategoryImg}
+          <PrimaryButton
+            btnName={"Submit!!"}
+            style={styles.btn}
+            onPress={handleAddCategory}
           />
         </View>
-        <PrimaryButton
-          btnName={"Submit!!"}
-          style={styles.btn}
-          onPress={handleAddCategory}
-        />
       </ScrollView>
     </ImageBackground>
   );

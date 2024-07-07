@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import COLORS from "../../theme/colors";
 
 export const styles = StyleSheet.create({
   root: {
@@ -13,10 +14,12 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginTop: "5%",
+    backgroundColor: COLORS.primaryBlue,
   },
   title: {
     fontWeight: "bold",
     fontSize: 16,
+    color: COLORS.white,
   },
   primaryTitleContainer: {
     width: "90%",
@@ -51,6 +54,6 @@ export const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   btn: {
-    marginTop: "5%"
-  }
+    marginTop: "5%",
+  },
 });

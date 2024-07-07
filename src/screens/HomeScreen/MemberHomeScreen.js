@@ -1,7 +1,7 @@
 import { View } from "react-native";
 import MenuCard from "../../components/cards/MenuCard";
 import { styles } from "./styles";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { fetchReservedBooks } from "../../services/service";
 import { useDispatch, useSelector } from "react-redux";
 import { updateReservedBooks } from "../../redux/UserSlice";
@@ -33,12 +33,12 @@ export default function MemberHomeScreen({ navigation }) {
           onPress={() => navigation.navigate("CategoriesScreen")}
         />
         <MenuCard
-          cardName={"Messages"}
+          cardName={"Admin List"}
           iconName={"list"}
           onPress={() => navigation.navigate("MemberListScreen")}
         />
         <MenuCard
-          cardName={"Reserved"}
+          cardName={"Reserved Books"}
           iconName={"get-pocket"}
           onPress={() => navigation.navigate("ReservedBookListScreen")}
         />

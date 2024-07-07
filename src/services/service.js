@@ -230,3 +230,14 @@ export async function addCategory(categoryName, categoryImg) {
     throw error;
   }
 }
+
+export async function addPenalizedUsers(userId) {
+  try {
+    const penalizedUsersRef = collection(db, "penalizedUsers");
+    await addDoc(penalizedUsersRef, { userId: userId });
+    return true;
+  } catch (error) {
+    console.error("ERROR: ", error);
+    throw error;
+  }
+}

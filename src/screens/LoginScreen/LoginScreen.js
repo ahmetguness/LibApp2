@@ -61,49 +61,56 @@ export default function LoginScreen({ navigation }) {
   };
 
   return (
-    <ScrollView style={{ flex: 1, backgroundColor: COLORS.primaryBlue }}>
-      <View style={styles.titleContainer}>
-        <Text style={styles.title}>{userInfo.userType.toUpperCase()}</Text>
-      </View>
-      <View style={styles.switchContainer}>
-        <HStack alignItems="center" space={4}>
-          <Text style={styles.switchText}>Member</Text>
-          <Switch
-            size="lg"
-            isChecked={userInfo.userType === "admin"}
-            onToggle={handleSwitchChange}
-          />
-          <Text style={styles.switchText}>Admin</Text>
-        </HStack>
-      </View>
-      <View
-        style={{
-          backgroundColor: COLORS.primaryBlue1,
-          borderRadius: 10,
-          marginHorizontal: "10%",
-          paddingBottom: 60,
-          marginTop: "5%",
-        }}
-      >
-        <View style={styles.loginFormContainer}>
-          <FormControlArea
-            formName={"UserName"}
-            formType={"text"}
-            value={userName}
-            onChange={setUserName}
-          />
-          <FormControlArea
-            formName={"Password"}
-            formType={"password"}
-            value={password}
-            onChange={setPassword}
+    <ScrollView
+      style={{
+        flex: 1,
+        backgroundColor: COLORS.primaryBlue,
+      }}
+    >
+      <View style={{ flex: 1, justifyContent: "center", marginTop: "12%" }}>
+        <View style={styles.titleContainer}>
+          <Text style={styles.title}>{userInfo.userType.toUpperCase()}</Text>
+        </View>
+        <View style={styles.switchContainer}>
+          <HStack alignItems="center" space={4}>
+            <Text style={styles.switchText}>Member</Text>
+            <Switch
+              size="lg"
+              isChecked={userInfo.userType === "admin"}
+              onToggle={handleSwitchChange}
+            />
+            <Text style={styles.switchText}>Admin</Text>
+          </HStack>
+        </View>
+        <View
+          style={{
+            backgroundColor: COLORS.primaryBlue1,
+            borderRadius: 10,
+            marginHorizontal: "10%",
+            paddingBottom: 60,
+            marginTop: "5%",
+          }}
+        >
+          <View style={styles.loginFormContainer}>
+            <FormControlArea
+              formName={"UserName"}
+              formType={"text"}
+              value={userName}
+              onChange={setUserName}
+            />
+            <FormControlArea
+              formName={"Password"}
+              formType={"password"}
+              value={password}
+              onChange={setPassword}
+            />
+          </View>
+          <PrimaryButton
+            btnName={"Log In"}
+            style={styles.primaryButton}
+            onPress={handleLogin}
           />
         </View>
-        <PrimaryButton
-          btnName={"Log In"}
-          style={styles.primaryButton}
-          onPress={handleLogin}
-        />
       </View>
     </ScrollView>
   );

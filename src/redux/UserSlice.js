@@ -10,6 +10,7 @@ export const UserSlice = createSlice({
       userPassword: "",
     },
     userFavorites: null,
+    penaltizedUsers: [],
   },
   reducers: {
     updateUserType(state, action) {
@@ -59,6 +60,14 @@ export const UserSlice = createSlice({
     updateReservedBooks(state, action) {
       state.userFavorites = action.payload;
     },
+    updatePenaltizedUsers(state, action) {
+      const index = state.penaltizedUsers.indexOf(action.payload);
+      if (index > -1) {
+        state.penaltizedUsers.splice(index, 1);
+      } else {
+        state.penaltizedUsers.push(action.payload);
+      }
+    },
   },
 });
 
@@ -70,4 +79,5 @@ export const {
   updateUserInformation,
   updateUserFavorites,
   updateReservedBooks,
+  updatePenaltizedUsers,
 } = UserSlice.actions;

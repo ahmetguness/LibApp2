@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { ImageBackground, View, FlatList } from "react-native";
 import { styles } from "./styles";
-import { fetchUsers, fetchReservedBooks } from "../../services/service";
+import { fetchUsers, addPenalizedUsers } from "../../services/service";
 import MemberListCard from "../../components/cards/MemberListCard";
 import { Heading } from "native-base";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  updateMessageReceiverInfo,
   updateMessageReceiverUserName,
   updateReceiverId,
   updateSenderId,
 } from "../../redux/MessageSlice";
+import { updatePenaltizedUsers } from "../../redux/UserSlice";
 
 export default function MemberListScreen({ navigation }) {
   const [members, setMembers] = useState([]);
@@ -33,8 +33,18 @@ export default function MemberListScreen({ navigation }) {
     getMembers();
   }, [listType]);
 
+  const addPenaltizedUser = async (itemId) => {
+    try {
+      await addPenalizedUsers(itemId);
+      dispatcher(updatePenaltizedUsers(itemId));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const renderMember = ({ item }) => (
     <MemberListCard
+      userType={userType}
       memberName={
         listType === "admin" ? item.adminUserName : item.memberUserName
       }
@@ -49,6 +59,8 @@ export default function MemberListScreen({ navigation }) {
           )
         );
       }}
+      onPressDelete={() => addPenaltizedUser(item.id)}
+      memberId={item.id}
     />
   );
 
