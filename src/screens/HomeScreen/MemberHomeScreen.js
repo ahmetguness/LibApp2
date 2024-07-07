@@ -1,4 +1,4 @@
-import { Image, View } from "react-native";
+import { View } from "react-native";
 import MenuCard from "../../components/cards/MenuCard";
 import { styles } from "./styles";
 import { useEffect } from "react";
@@ -25,26 +25,21 @@ export default function MemberHomeScreen({ navigation }) {
 
   return (
     <View style={{ flex: 1 }}>
-      <View style={{ height: 40, width: 40 }}>
-        <Image
-          style={{ height: 40, width: 40 }}
-          source={require("../../assets/background/books.png")}
-        />
-      </View>
-
+      <View style={{ height: 40, width: 40 }}></View>
       <View style={styles.rowCardContainer}>
         <MenuCard
           cardName={"Categories"}
+          iconName={"table"}
           onPress={() => navigation.navigate("CategoriesScreen")}
         />
         <MenuCard
           cardName={"Messages"}
+          iconName={"list"}
           onPress={() => navigation.navigate("MemberListScreen")}
         />
-      </View>
-      <View style={styles.rowCardContainer}>
         <MenuCard
           cardName={"Reserved"}
+          iconName={"get-pocket"}
           onPress={() => navigation.navigate("ReservedBookListScreen")}
         />
       </View>

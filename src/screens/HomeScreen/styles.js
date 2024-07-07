@@ -5,11 +5,11 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
   titleContainer: {
-    marginTop: "4%",
+    marginTop: "10%",
     height: 40,
     justifyContent: "center",
     alignItems: "center",
-    marginBottom: "4%",
+    marginBottom: "10%",
   },
   title: {
     fontWeight: "bold",
@@ -22,7 +22,6 @@ export const styles = StyleSheet.create({
     width: "80%",
   },
   rowCardContainer: {
-    flexDirection: "row",
     justifyContent: "space-between",
     marginBottom: "10%",
   },

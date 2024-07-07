@@ -28,7 +28,14 @@ export default function MessageScreen() {
     async function fetchMessages() {
       try {
         const fetchedMessages = await getMessages(senderId, receiverId);
-        dispatch(setMessages(fetchedMessages));
+        console.log("Fetched messages:", fetchedMessages); // Log fetched messages for debugging
+
+        // Ensure each message has a valid date
+        const formattedMessages = fetchedMessages.map((msg) => ({
+          ...msg,
+          date: msg.date ? new Date(msg.date).toISOString() : new Date().toISOString(), // Convert date to ISO string if necessary
+        }));
+        dispatch(setMessages(formattedMessages));
       } catch (error) {
         console.error("Error fetching messages:", error);
       }
@@ -43,6 +50,7 @@ export default function MessageScreen() {
       await sendMessage(senderId, receiverId, newMessage);
       dispatch(
         addMessage({
+          id: new Date().getTime(), // Ensure unique id for new message
           senderId,
           receiverId,
           messageContext: newMessage,

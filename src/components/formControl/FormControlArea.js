@@ -21,7 +21,7 @@ export default function FormControlArea({
             <FormControl.Label
               _text={{
                 fontSize: "lg",
-                color: "black",
+                color: "blue",
                 fontWeight: "bold",
               }}
             >
@@ -33,7 +33,11 @@ export default function FormControlArea({
               onChangeText={onChange}
               placeholder={formName}
             />
-            <FormControl.HelperText>
+            <FormControl.HelperText
+              _text={{
+                color: "red",
+              }}
+            >
               Must be at least 3 characters.
             </FormControl.HelperText>
             <FormControl.ErrorMessage

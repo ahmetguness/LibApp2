@@ -26,20 +26,22 @@ export default function AdminHomeScreen({ navigation }) {
       <View style={styles.rowCardContainer}>
         <MenuCard
           cardName={"Categories"}
+          iconName={"table"}
           onPress={() => navigation.navigate("CategoriesScreen")}
         />
         <MenuCard
           cardName={"Member List"}
+          iconName={"list"}
           onPress={() => navigation.navigate("MemberListScreen")}
         />
-      </View>
-      <View style={styles.rowCardContainer}>
         <MenuCard
           cardName={"Add Book"}
+          iconName={"plus"}
           onPress={() => navigation.navigate("AddBookScreen")}
         />
         <MenuCard
           cardName={"Add Category"}
+          iconName={"arrow-up"}
           onPress={() => navigation.navigate("AddCategoryScreen")}
         />
       </View>

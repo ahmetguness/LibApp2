@@ -9,12 +9,12 @@ import { updateUserFavorites } from "../../redux/UserSlice";
 import { reserveBook } from "../../services/service";
 
 export default function BookDetailsScreen() {
-  const bookInfo = useSelector((state) => state.book.bookInfo);
-  const categoryId = useSelector((state) => state.book.categoryId);
-  const bookId = useSelector((state) => state.book.bookId);
-  const userFavs = useSelector((state) => state.user.userFavorites);
-  const userType = useSelector((state) => state.user.userInfo.userType);
-  const userId = useSelector((state) => state.user.userInfo.userId);
+  const bookInfo = useSelector((state) => state.book.bookInfo) || {};
+  const categoryId = useSelector((state) => state.book.categoryId) || "";
+  const bookId = useSelector((state) => state.book.bookId) || "";
+  const userFavs = useSelector((state) => state.user.userFavorites) || {};
+  const userType = useSelector((state) => state.user.userInfo?.userType) || "";
+  const userId = useSelector((state) => state.user.userInfo?.userId) || "";
   const dispatch = useDispatch();
 
   const [shouldReserve, setShouldReserve] = useState(false);
@@ -64,10 +64,13 @@ export default function BookDetailsScreen() {
     >
       <ScrollView style={styles.scView}>
         <View style={styles.headingContainer}>
-          <Heading size="xl">{bookInfo.bookName}</Heading>
+          <Heading size="xl">{bookInfo.bookName || "Unknown Title"}</Heading>
         </View>
         <View style={styles.imgContainer}>
-          <Image style={styles.img} source={{ uri: bookInfo.bookImg }} />
+          <Image
+            style={styles.img}
+            source={{ uri: bookInfo.bookImg || "default_image_url" }}
+          />
         </View>
         <View
           style={{
@@ -77,9 +80,9 @@ export default function BookDetailsScreen() {
           }}
         >
           <SummaryCard
-            bookName={bookInfo.bookName}
-            bookSum={bookInfo.bookSum}
-            bookAuthor={bookInfo.bookAuthor}
+            bookName={bookInfo.bookName || "Unknown Title"}
+            bookSum={bookInfo.bookSum || "No summary available"}
+            bookAuthor={bookInfo.bookAuthor || "Unknown Author"}
             onPress={null}
           />
         </View>

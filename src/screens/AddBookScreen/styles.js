@@ -36,4 +36,21 @@ export const styles = StyleSheet.create({
     width: "90%",
     marginHorizontal: "5%",
   },
+  categoryContainer: {
+    marginTop: "5%",
+    width: "90%",
+    marginHorizontal: "5%",
+  },
+  categoryTitleContainer: {
+    marginTop: "5%",
+    marginBottom: "5%",
+  },
+  categoryTitle: {
+    color: "white",
+    fontSize: 18,
+    fontWeight: "bold",
+  },
+  btn: {
+    marginTop: "5%"
+  }
 });

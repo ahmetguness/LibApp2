@@ -24,7 +24,7 @@ export const styles = StyleSheet.create({
     color: "white",
   },
   loginFormContainer: {
-    marginTop: "20%",
+    marginTop: "36%",
   },
   primaryButton: {
     marginTop: "6%",

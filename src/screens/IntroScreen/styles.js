@@ -9,12 +9,14 @@ export const styles = StyleSheet.create({
     flex: 1,
     marginRight: "8%",
     marginLeft: "8%",
-    marginTop: "120%",
+    marginTop: "150%",
   },
   text: {
     color: COLORS.white,
     fontSize: 16,
     fontWeight: "bold",
+    textShadowColor: "black",
+    shadowRadius: 10,
   },
   btn: {
     marginTop: "4%",

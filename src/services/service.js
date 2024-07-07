@@ -216,3 +216,18 @@ export async function addBook(categoryId, bookInfo) {
     throw error;
   }
 }
+
+export async function addCategory(categoryName, categoryImg) {
+  try {
+    const categoriesRef = collection(db, "categories");
+    const newCategory = {
+      categoryName: categoryName,
+      categoryImg: categoryImg,
+    };
+    await addDoc(categoriesRef, newCategory);
+    return true;
+  } catch (error) {
+    console.error("ERROR: ", error);
+    throw error;
+  }
+}
