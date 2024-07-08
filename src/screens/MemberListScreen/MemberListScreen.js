@@ -70,7 +70,7 @@ export default function MemberListScreen({ navigation }) {
       source={require("../../assets/background/books.png")}
     >
       <View style={styles.headingContainer}>
-        <Heading>Member List</Heading>
+        <Heading>{listType.toUpperCase()} LIST</Heading>
       </View>
       <FlatList
         data={members}
